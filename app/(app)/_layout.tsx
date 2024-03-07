@@ -42,7 +42,7 @@ export default function AppLayout() {
         options={{
           // Set the presentation mode to modal for our modal route.
           presentation: 'modal',
-          title: 'Todo'
+          title: 'Task'
         }}
       />
     </Stack>

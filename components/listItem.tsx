@@ -2,7 +2,11 @@ import React, { PropsWithChildren, useCallback } from 'react'
 import { Pressable, Text } from 'react-native'
 import { Group } from './layout'
 import { useAppDispatch } from '@/hooks/redux'
-import { deleteTodo, toggleTodo } from '@/redux/features/todos/todosSlice'
+import {
+  TodoState,
+  deleteTodo,
+  toggleTodo
+} from '@/redux/features/todos/todosSlice'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import { cn } from '@/lib/utils'
 import { router } from 'expo-router'
@@ -10,9 +14,15 @@ import { router } from 'expo-router'
 interface Props {
   id: string
   checked: boolean
+  priority: TodoState['priority']
 }
 
-const ListItem = ({ children, id, checked }: PropsWithChildren<Props>) => {
+const ListItem = ({
+  children,
+  id,
+  checked,
+  priority
+}: PropsWithChildren<Props>) => {
   const dispatch = useAppDispatch()
 
   const handleDeleteTodo = useCallback(() => dispatch(deleteTodo({ id })), [])
@@ -34,6 +44,15 @@ const ListItem = ({ children, id, checked }: PropsWithChildren<Props>) => {
         fillColor='black'
         unfillColor='white'
       />
+      <Text
+        className={cn('mr-2', {
+          'text-green-400': priority === 'low',
+          'text-yellow-400': priority === 'medium',
+          'text-red-400': priority === 'high'
+        })}
+      >
+        {priority}
+      </Text>
       <Text
         numberOfLines={1}
         className={cn('flex-1', { 'line-through': checked })}

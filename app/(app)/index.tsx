@@ -13,6 +13,7 @@ const AppPage = () => {
   const insets = useSafeAreaInsets()
 
   const todos = useTodos(session)
+  const completedTodos = useTodos(session, true)
 
   return (
     <View
@@ -21,11 +22,18 @@ const AppPage = () => {
         paddingBottom: insets.bottom
       }}
     >
+      <Text className='text-lg mb-4'>
+        Tasks: {completedTodos.length}/{todos.length}
+      </Text>
       <FlashList
         ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
         data={todos}
         renderItem={({ item }) => (
-          <ListItem id={item.id} checked={item.completed}>
+          <ListItem
+            id={item.id}
+            checked={item.completed}
+            priority={item.priority}
+          >
             {item.text}
           </ListItem>
         )}
