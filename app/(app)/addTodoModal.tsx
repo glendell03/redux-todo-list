@@ -44,7 +44,7 @@ const AddTodoModal = () => {
       dispatch(addTodo({ id: uuid, text: todo, username: session, priority }))
       navigation.goBack()
     }
-  }, [todo, todoById])
+  }, [todo, todoById, priority])
 
   return (
     <Stack className='p-4' gap='md'>

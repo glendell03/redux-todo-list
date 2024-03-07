@@ -30,6 +30,7 @@ const AppPage = () => {
         data={todos}
         renderItem={({ item }) => (
           <ListItem
+            key={item.id}
             id={item.id}
             checked={item.completed}
             priority={item.priority}
